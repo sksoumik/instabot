@@ -51,4 +51,3 @@ for i in range(0, 100):
         print(e)
         pt.scroll(-500)
         sleep(random.uniform(.7, 2.0))
-
