@@ -27,27 +27,28 @@ class GuiCommand:
 
 
 
-commands = GuiCommand(0, 0)
+if __name__ == '__main__':
+    commands = GuiCommand(0, 0)
 
-for i in range(0, 100):
-    try:
-        commands.navigate_to_heart(.1)
-        # Check if the current pixel color matches the color of the heart (255, 0, 88)
-        # If it does, it means that the heart is red, and it's already been liked
-        # so we scroll down without clicking
-        if pt.pixelMatchesColor(pt.position().x, pt.position().y, (255, 0, 88), tolerance=10):
+    for i in range(0, 100):
+        try:
+            commands.navigate_to_heart(.1)
+            # Check if the current pixel color matches the color of the heart (255, 0, 88)
+            # If it does, it means that the heart is red, and it's already been liked
+            # so we scroll down without clicking
+            if pt.pixelMatchesColor(pt.position().x, pt.position().y, (255, 0, 88), tolerance=10):
+                pt.scroll(-500)
+                sleep(random.uniform(.3, .9))
+
+            else:
+                # If the heart is not red, then click on it
+                # and scroll down
+                pt.click()
+                print('Heart clicked!')
+                sleep(random.uniform(.2, 1.5))
+                pt.scroll(-500)
+
+        except Exception as e:
+            print(e)
             pt.scroll(-500)
-            sleep(random.uniform(.3, .9))
-
-        else:
-            # If the heart is not red, then click on it
-            # and scroll down
-            pt.click()
-            print('Heart clicked!')
-            sleep(random.uniform(.2, 1.5))
-            pt.scroll(-500)
-
-    except Exception as e:
-        print(e)
-        pt.scroll(-500)
-        sleep(random.uniform(.7, 2.0))
+            sleep(random.uniform(.7, 2.0))
